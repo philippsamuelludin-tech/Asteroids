@@ -5,7 +5,7 @@ from circleshape import *
 
 class Shot(CircleShape):
     def __init__(self, x, y, velocity):
-        super().__init__(x, y, SHOT_RADUIS)
+        super().__init__(x, y, SHOT_RADIUS)
         self.velocity = velocity
 
     def draw(self, screen, color="white", line_width=LINE_WIDTH):

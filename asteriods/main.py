@@ -1,10 +1,11 @@
-import pygame, sys # type: ignore
+import pygame, sys
 from constants import *
 from logger import *
 from player import *
 from asteroid import *
 from asteroidfield import *
 from shot import *  
+from points import *
 
 def main():
     pygame.init()
@@ -24,6 +25,8 @@ def main():
     print(f"Screen height: {SCREEN_HEIGHT}")
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     player = Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
+    points, text, textRect = start_points()
+
     
 
 
@@ -34,6 +37,7 @@ def main():
             if event.type == pygame.QUIT:
                 return
         screen.fill("black")
+        screen.blit(text, textRect)
         updatable.update(dt)
         for asteroid in asteroids:
             if player.collides_with(asteroid):
@@ -46,9 +50,15 @@ def main():
                     log_event("asteroid_shot")
                     shot.kill()
                     asteroid.split()
+                    points, text, textRect = update_points(points)
+                    asteroid_text, asteroid_text_rect = asteroid_point(asteroid)
+                    screen.blit(asteroid_text, asteroid_text_rect)
+
+
                 
         for obj in drawable:
             obj.draw(screen)
+
         pygame.display.flip()
         dt = clock.tick(60) / 1000
         
