@@ -29,9 +29,9 @@ def main():
     player = Player(x = SCREEN_WIDTH / 2, y = SCREEN_HEIGHT / 2)
     points, text, textRect = start_points()
     lives, lives_text, livesRect = start_lives()
-
     floating_texts = []
     player_lives = PLAYER_LIVES
+    particles = []
  
     while True:
         log_state()
@@ -65,6 +65,7 @@ def main():
                     asteroid.split()
                     points, text, textRect = update_points(points)
                     floating_texts.append(asteroid_point(asteroid))
+                    particles.extend(create_particles(asteroid.position.x, asteroid.position.y))
  
         for obj in drawable:
             obj.draw(screen)
@@ -74,6 +75,12 @@ def main():
             ft.update()
             ft.draw(screen)
         floating_texts = [ft for ft in floating_texts if ft.alive]
+
+        # Update and draw all particles
+        for particle in particles:
+            particle.update()
+            particle.draw(screen)
+        particles = [particle for particle in particles if particle.alive]
  
         pygame.display.flip()
         dt = clock.tick(60) / 1000
