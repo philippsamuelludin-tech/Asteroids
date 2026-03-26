@@ -12,7 +12,7 @@ class FloatingText:
         self.alive = True
         white = (255, 255, 255)
         green = (0, 255, 0)
-        font = pygame.font.Font('freesansbold.ttf', 32)
+        font = pygame.font.Font('freesansbold.ttf', 20)
         self.surface = font.render(text, True, white)
         self.rect = self.surface.get_rect(center=(x, y))
 
