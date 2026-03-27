@@ -65,7 +65,7 @@ class Particle(FloatingText):
     def __init__(self, x, y):
         super().__init__("", x, y, duration=30)
         self.velocity = pygame.Vector2(random.uniform(-2, 2), random.uniform(-2, 2))
-        self.surface = pygame.Surface((4, 4))
+        self.surface = pygame.Surface((random.uniform(5, 10), random.uniform(5, 15)))
         self.surface.fill((255, 165, 0))  # Yellow particles
         self.rect = self.surface.get_rect(center=(x, y))
 
