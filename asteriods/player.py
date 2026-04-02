@@ -63,7 +63,7 @@ class Player(CircleShape):
         elif self.position.y > SCREEN_HEIGHT:
             self.position.y -= SCREEN_HEIGHT
         
-
+        
         self.move(dt)
         self.velocity *= DRAG
 
